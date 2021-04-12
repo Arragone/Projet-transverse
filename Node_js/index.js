@@ -29,43 +29,20 @@ app.get('/', function (req, res) {
   res.send('Hello World, Nice !')
   })
 
-app.get('/allPersons', function (req, res) {
-  con.query('SELECT * FROM person',(err,results) => {
+app.get('/allGames', function (req, res) {
+  con.query('SELECT * FROM Game',(err,results) => {
     if(err) throw err;
       res.json(results);
     });
 })
 
-app.get('/person/:id', function (req, res) {
-  con.query('select * from person where id=?',[req.params.id],function (err, results) {
-    if (err) throw err;
-      res.send(results);
+app.get('/allLevel', function (req, res) {
+  con.query('SELECT * FROM Level',(err,results) => {
+    if(err) throw err;
+      res.json(results);
     });
-});
+})
 
-app.post('/addPerson', function (req, res) {
-  var postData = req.body;
-  con.query('INSERT INTO person SET ?', postData, function (error, results, fields) {
-    if (error) throw error;
-      res.send(results);
-    });
-});
-
-app.post('/updatePerson', function (req, res) {
-con.query('UPDATE person SET name=?, lastName=?, age=? where id=?', [req.body.name,req.body.lastName, req.body.age, req.body.id],
-function (error, results, fields) {
-  if (error) throw error;
-    res.send(results);
-  });
-});
-
-app.delete('/deletePerson', function (req, res) {
-console.log(req.body);
-con.query('DELETE FROM person WHERE id=?',[req.body.id], function (error, results, fields) {
-  if (error) throw error;
-    res.send('Record has been deleted!');
-  });
-});
 
 app.listen(3000, function () {
   console.log('App listening on port 3000! ')

@@ -1,0 +1,15 @@
+<h1>IggDrasil</h1>
+
+<h2>number_of_cases = {{ nbr_cases }}</h2>
+
+<button (click)="newGame()"></button>
+
+
+<main>
+
+  <app-square
+    *ngFor="let val of squares; let i = index"
+    [value]="val"
+  ></app-square>
+
+</main>
