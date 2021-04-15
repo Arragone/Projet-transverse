@@ -1,6 +1,6 @@
 main {
   display: grid;
-  grid-template-columns: repeat(30, 30px);
+  grid-template-columns: repeat(4, 30px);
 }
 
 app-square {

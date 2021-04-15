@@ -11,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
 export class BoardComponent implements OnInit {
   squares: any[];
   nbrCases: number;
-  levelData : any ;
+  levelData : any;
   actualLevel: number;
 
 
@@ -22,45 +22,36 @@ export class BoardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.newGame()
-  }
-
-  getGame(){
-    this.httpClient.get("http://localhost:3000/allLevel", { responseType: 'text' }).subscribe(res => {this.levelData = JSON.parse(res);console.log(res);});
-
-    //console.log(this.levelData["Lenght"]);
+    this.httpClient.get("http://localhost:3000/allLevel", { responseType: 'text' }).subscribe(res => {this.levelData = JSON.parse(res);});
   }
 
   newGame(){
-    this.getGame()
 
-    //console.log(this.levelData["Lenght"]);
+    console.log(this.levelData[this.actualLevel-1].Lenght);
 
-    this.squares = Array(30 * 20).fill('empty_square.png');
-    for (let i = 0; i < 30; i++) {
+    this.squares = Array(this.levelData[this.actualLevel-1].Lenght * this.levelData[this.actualLevel-1].Width).fill('empty_square.png');
+    for (let i = 0; i < this.levelData[this.actualLevel-1].Lenght; i++) {
       this.squares[i] = 'square.png'
-      this.squares[19*30 + i] = 'square.png'
+      this.squares[(this.levelData[this.actualLevel-1].Width - 1 ) * this.levelData[this.actualLevel-1].Lenght + i] = 'square.png'
     }
-    for (let i = 1; i < 20; i++) {
-      this.squares[i * 30] = 'square.png'
-      this.squares[i * 30 + 29] = 'square.png'
+    for (let i = 1; i < this.levelData[this.actualLevel-1].Width; i++) {
+      this.squares[i * this.levelData[this.actualLevel-1].Lenght] = 'square.png'
+      this.squares[i * this.levelData[this.actualLevel-1].Lenght + this.levelData[this.actualLevel-1].Lenght - 1] = 'square.png'
     }
 
-    this.nbrCases = 30 * 20;
+    this.nbrCases = this.levelData[this.actualLevel-1].Lenght * this.levelData[this.actualLevel-1].Width;
+  }
+
+  actualiseLevel(){
+
   }
 
   nextLevel(){
-    for (let i = 1; i < 19; i++) {
-      this.squares[5+i*30] = 'square.png'
-      this.squares[7+i*30] = 'empty_square.png'
-    }
+
   }
 
   lastLevel(){
-    for (let i = 1; i < 19; i++) {
-      this.squares[7+i*30] = 'square.png'
-      this.squares[5+i*30] = 'empty_square.png'
-    }
+
   }
 
 }

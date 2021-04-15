@@ -47,3 +47,17 @@ app.get('/allLevel', function (req, res) {
 app.listen(3000, function () {
   console.log('App listening on port 3000! ')
 })
+
+const http = require('http')
+const socketIO = require('socket.io')
+const server = http.createServer(app)
+const io = socketIO(server)
+io.on('connection', socket => {
+console.log('New client connected')
+socket.on('new-message', (message) => { //event
+io.emit('message', {text: message}); // broadcast
+console.log(message);});
+socket.on('disconnect', () => {
+console.log('user disconnected') })});
+server.listen(3000, function () {
+console.log('app listening on port 3000! ')})
