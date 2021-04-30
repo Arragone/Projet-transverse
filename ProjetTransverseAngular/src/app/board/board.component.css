@@ -1,9 +1,5 @@
-main {
+main{
   display: grid;
   grid-template-columns: repeat(4, 30px);
-}
-
-app-square {
-  border: 0px gray solid;
-  height: 30px;
+  grid-gap: 1px;
 }

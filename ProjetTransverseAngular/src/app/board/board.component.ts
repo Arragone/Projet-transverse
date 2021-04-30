@@ -27,8 +27,6 @@ export class BoardComponent implements OnInit {
 
   newGame(){
 
-    console.log(this.levelData[this.actualLevel-1].Lenght);
-
     this.squares = Array(this.levelData[this.actualLevel-1].Lenght * this.levelData[this.actualLevel-1].Width).fill('empty_square.png');
     for (let i = 0; i < this.levelData[this.actualLevel-1].Lenght; i++) {
       this.squares[i] = 'square.png'
