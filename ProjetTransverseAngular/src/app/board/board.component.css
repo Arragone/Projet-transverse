@@ -1,5 +1,0 @@
-main{
-  display: grid;
-  grid-template-columns: repeat(4, 30px);
-  grid-gap: 1px;
-}

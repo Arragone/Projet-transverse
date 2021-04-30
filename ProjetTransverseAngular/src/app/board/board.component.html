@@ -1,15 +1,11 @@
 
+
+
+<app-square
+  *ngFor="let val of squares; let i = index"
+  [value]="val"
+></app-square>
+
 <button (click)="newGame()"></button>
-<button (click)="actualiseLevel()"></button>
 <button (click)="nextLevel()"></button>
 <button (click)="lastLevel()"></button>
-
-Ceci est un test
-<main>
-
-  <app-square
-    *ngFor="let val of squares; let i = index"
-    [value]="val"
-  ></app-square>
-
-</main>
