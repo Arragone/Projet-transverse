@@ -4,8 +4,8 @@
 
 <ng-template [ngIf]="startGame==1">
   <app-board
-   class="main"
-   style="display: grid;grid-template-columns: repeat( {{this.levelData[this.actualLevel-1].Lenght}} , 30px);grid-gap: 0px;border: 0px gray solid;height: 30px;">
+   class="main" 
+   style="grid-template-columns: repeat( {{this.levelData[this.actualLevel-1].Lenght}} , 35px);"
   ></app-board>
 </ng-template>
 
