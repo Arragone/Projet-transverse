@@ -30,9 +30,8 @@ export class MapComponent implements OnInit {
     this.startGame = 1;
   }
 
-  nextLevelStyle(lvl: string){
-    console.log("test");
-    this.actualLevel += 1;
-    //this.startGame = 1;
+
+  nextLevelStyle(event :any){
+    this.actualLevel = event;
   }
 }

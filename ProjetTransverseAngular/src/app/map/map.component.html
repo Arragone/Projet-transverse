@@ -1,13 +1,12 @@
 <ng-template [ngIf]="startGame==0">
-  <button (click)="startGameOnMenu()"></button>
+  <button (click)="startGameOnMenu()">Start the Game</button>
 </ng-template>
 
 
 <ng-template [ngIf]="startGame==1">
   <app-board
+   (nextLevelInStyle)="nextLevelStyle($event)"
    class="main"
-   style="display: grid;grid-template-columns: repeat( {{this.levelData[this.actualLevel-1].Lenght}} , 30px);grid-gap: 0px;border: 0px gray solid;height: 30px;">
+   style="display: grid;grid-template-columns: repeat( {{this.levelData[this.actualLevel-1].Lenght}} , 30px);grid-template-rows: repeat( {{this.levelData[this.actualLevel-1].Width}} , 30px);grid-gap: 0px;">
   ></app-board>
 </ng-template>
-
-<!-- <app-board-output (nextLevelInStyle)="nextLevelStyle($event)"></app-board-output> -->

@@ -12,7 +12,10 @@ import { HttpClient } from '@angular/common/http';
 })
 export class BoardComponent implements OnInit {
 
-  squares: any[];
+  @Output()
+  nextLevelInStyle : EventEmitter<number> = new EventEmitter<number>();
+
+  squaresTab: any[];
   nbrCases: number;
   levelData : any;
   actualLevel: number;
@@ -20,7 +23,7 @@ export class BoardComponent implements OnInit {
 
 
   constructor(private httpClient: HttpClient){
-    this.squares = Array(0).fill(null);
+    this.squaresTab = Array(0).fill(null);
     this.nbrCases = 0;
     this.actualLevel = 1;
     this.newLevel = " ";
@@ -31,40 +34,41 @@ export class BoardComponent implements OnInit {
   }
 
   newGame(){
-
     this.refreshLevel();
-    /*
-    for (let i = 0; i < this.levelData[this.actualLevel-1].Lenght; i++) {
-      this.squares[i] = 'square.png'
-      this.squares[(this.levelData[this.actualLevel-1].Width - 1 ) * this.levelData[this.actualLevel-1].Lenght + i] = 'square.png'
-    }
-    for (let i = 1; i < this.levelData[this.actualLevel-1].Width; i++) {
-      this.squares[i * this.levelData[this.actualLevel-1].Lenght] = 'square.png'
-      this.squares[i * this.levelData[this.actualLevel-1].Lenght + this.levelData[this.actualLevel-1].Lenght - 1] = 'square.png'
-    }*/
-
   }
 
+
+
+
   refreshLevel(){
-    this.squares = Array(this.levelData[this.actualLevel-1].Lenght * this.levelData[this.actualLevel-1].Width).fill('empty_square.png');
+    this.nextLevelInStyle.emit(this.actualLevel); //Actualise the size of the grid
 
-    this.newLevel = this.levelData[this.actualLevel-1].Container;
+    this.squaresTab = Array(this.levelData[this.actualLevel-1].Lenght * this.levelData[this.actualLevel-1].Width);
 
+
+    this.newLevel = this.levelData[this.actualLevel-1].Container;                                           //Create the wall
     this.nbrCases = this.levelData[this.actualLevel-1].Lenght * this.levelData[this.actualLevel-1].Width;
     for(let i = 0; i < this.nbrCases; i++){
       if(this.newLevel[i] == '0'){
-        this.squares[i] = 'empty_square.png'
+        this.squaresTab[i] = 'empty_square.png'
       }
       if(this.newLevel[i] == '1'){
-        this.squares[i] = 'square.png'
+        this.squaresTab[i] = 'square.png'
       }
     }
+
+
+
+    this.squaresTab[this.levelData[this.actualLevel-1].Start1] = 'player1.png';
+
+    this.squaresTab[this.levelData[this.actualLevel-1].Start2] = 'player2.png';
+
+
   }
 
-  //@Output() nextLevelInStyle = new EventEmitter<string>();
+
 
   nextLevel(){
-    //this.nextLevelInStyle.emit("this.actualLevel+1");
     this.actualLevel += 1;
     this.refreshLevel();
 
@@ -74,5 +78,4 @@ export class BoardComponent implements OnInit {
     this.actualLevel -= 1;
     this.refreshLevel();
   }
-
 }
