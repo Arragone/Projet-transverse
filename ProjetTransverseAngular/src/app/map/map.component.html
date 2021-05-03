@@ -1,7 +1,6 @@
 <ng-template [ngIf]="startGame==0">
-  <button (click)="startGameOnMenu()"></button>
+  <button class = "start"(click)="startGameOnMenu()">Start Game</button>
 </ng-template>
-
 
 <ng-template [ngIf]="startGame==1">
   <app-board
