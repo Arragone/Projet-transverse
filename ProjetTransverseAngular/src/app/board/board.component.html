@@ -1,9 +1,12 @@
 
 
+
 <app-square
   *ngFor="let val of squaresTab; let i = index"
   [value]="val"
 ></app-square>
+
+
 
 <div class = "Menu">
   <button (click)="newGame()"> Create the map</button>

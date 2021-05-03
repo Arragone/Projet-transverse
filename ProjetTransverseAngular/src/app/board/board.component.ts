@@ -31,6 +31,7 @@ export class BoardComponent implements OnInit {
 
   ngOnInit(): void {
     this.httpClient.get("http://localhost:3000/allLevel", { responseType: 'text' }).subscribe(res => {this.levelData = JSON.parse(res);});
+    this.newGame();
   }
 
   newGame(){
@@ -45,7 +46,6 @@ export class BoardComponent implements OnInit {
 
     this.squaresTab = Array(this.levelData[this.actualLevel-1].Lenght * this.levelData[this.actualLevel-1].Width);
 
-
     this.newLevel = this.levelData[this.actualLevel-1].Container;                                           //Create the wall
     this.nbrCases = this.levelData[this.actualLevel-1].Lenght * this.levelData[this.actualLevel-1].Width;
     for(let i = 0; i < this.nbrCases; i++){
@@ -55,15 +55,13 @@ export class BoardComponent implements OnInit {
       if(this.newLevel[i] == '1'){
         this.squaresTab[i] = 'square.png'
       }
+      if(this.newLevel[i] == '2'){
+        this.squaresTab[i] = 'player1.png'
+      }
+      if(this.newLevel[i] == '3'){
+        this.squaresTab[i] = 'player2.png'
+      }
     }
-
-
-
-    this.squaresTab[this.levelData[this.actualLevel-1].Start1] = 'player1.png';
-
-    this.squaresTab[this.levelData[this.actualLevel-1].Start2] = 'player2.png';
-
-
   }
 
 
@@ -77,5 +75,9 @@ export class BoardComponent implements OnInit {
   lastLevel(){
     this.actualLevel -= 1;
     this.refreshLevel();
+  }
+
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
   }
 }

@@ -1,5 +1,18 @@
 <ng-template [ngIf]="startGame==0">
   <button (click)="startGameOnMenu()">Start the Game</button>
+  <input type="text" ng-model="name"/>
+</ng-template>
+
+<ng-template [ngIf]="(showHistory==0) && (startGame==0)">
+  <button (click)="showHistoryButton()">Show History</button>
+</ng-template>
+
+<ng-template [ngIf]="(showHistory==1) && (startGame==0)">
+  <button (click)="showHistoryButton()">Un-Show History</button>
+  <ul>
+    <li *ngFor="let val of gameHistory;">{{ val.ID }} | {{ val.Pseudo1 }} | {{ val.Pseudo2 }} | {{ val.Time }} | {{ val.Score }} | {{ val.LastLvl }}</li>
+  </ul>
+
 </ng-template>
 
 
