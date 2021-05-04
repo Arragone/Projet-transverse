@@ -1,16 +1,18 @@
 
 
+<ng-template [ngIf]="startGame==1">
+  <app-square
+    *ngFor="let val of squaresTab; let i = index"
+    [value]="val"
+  ></app-square>
 
-<app-square
-  *ngFor="let val of squaresTab; let i = index"
-  [value]="val"
-></app-square>
 
 
-
-<div class = "Menu">
-  <button (click)="newGame()"> Create the map</button>
-  <button (click)="nextLevel()"> Next level</button>
-  <button (click)="lastLevel()"> Last level</button>
-  <div> Niveau actuelle : {{this.actualLevel}}</div>
-</div>
+  <div class = "Menu">
+    <div> Niveau actuelle : {{this.actualLevel}}</div>
+    <button (click)="newGame()"> Create the map</button>
+    <button (click)="nextLevel()"> Next level</button>
+    <button (click)="lastLevel()"> Last level</button>
+    <button (click)="goToMenu()"> Return to Menu</button>
+  </div>
+</ng-template>

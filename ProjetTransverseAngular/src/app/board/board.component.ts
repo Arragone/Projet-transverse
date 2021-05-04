@@ -12,14 +12,16 @@ import { HttpClient } from '@angular/common/http';
 })
 export class BoardComponent implements OnInit {
 
-  @Output()
-  nextLevelInStyle : EventEmitter<number> = new EventEmitter<number>();
+  @Output() nextLevelInStyle : EventEmitter<number> = new EventEmitter<number>();
+
+  @Output() goToMenuMessage : EventEmitter<number> = new EventEmitter<number>();
 
   squaresTab: any[];
   nbrCases: number;
   levelData : any;
   actualLevel: number;
   newLevel: string;
+  startGame: number;
 
 
   constructor(private httpClient: HttpClient){
@@ -27,18 +29,17 @@ export class BoardComponent implements OnInit {
     this.nbrCases = 0;
     this.actualLevel = 1;
     this.newLevel = " ";
+    this.startGame = 1;
   }
 
   ngOnInit(): void {
     this.httpClient.get("http://localhost:3000/allLevel", { responseType: 'text' }).subscribe(res => {this.levelData = JSON.parse(res);});
-    this.newGame();
+    //this.newGame();
   }
 
   newGame(){
     this.refreshLevel();
   }
-
-
 
 
   refreshLevel(){
@@ -64,8 +65,6 @@ export class BoardComponent implements OnInit {
     }
   }
 
-
-
   nextLevel(){
     this.actualLevel += 1;
     this.refreshLevel();
@@ -77,7 +76,8 @@ export class BoardComponent implements OnInit {
     this.refreshLevel();
   }
 
-  delay(ms: number) {
-    return new Promise( resolve => setTimeout(resolve, ms) );
+  goToMenu(){
+    this.startGame = 0;
+    this.goToMenuMessage.emit(this.startGame); //Lanch the menu
   }
 }

@@ -8,7 +8,15 @@
 </ng-template>
 
 <ng-template [ngIf]="(showHistory==1) && (startGame==0)">
-  <button (click)="showHistoryButton()">Un-Show History</button>
+  <button (click)="showHistoryButton()">Hide History</button>
+
+  <div class="scrollmenu">
+    <a (click)="sortId()">  Dernière partie  </a>
+    <a (click)="sortTime()">  Temps  </a>
+    <a (click)="sortScore()">  Score  </a>
+    <a (click)="sortLastLvl()">  Dernier Niveau  </a>
+  </div>
+
   <ul>
     <li *ngFor="let val of gameHistory;">{{ val.ID }} | {{ val.Pseudo1 }} | {{ val.Pseudo2 }} | {{ val.Time }} | {{ val.Score }} | {{ val.LastLvl }}</li>
   </ul>
@@ -19,6 +27,7 @@
 <ng-template [ngIf]="startGame==1">
   <app-board
    (nextLevelInStyle)="nextLevelStyle($event)"
+   (goToMenuMessage)="returnToMenu($event)"
    class="main"
    style="display: grid;grid-template-columns: repeat( {{this.levelData[this.actualLevel-1].Lenght}} , 30px);grid-template-rows: repeat( {{this.levelData[this.actualLevel-1].Width}} , 30px);grid-gap: 0px;">
   ></app-board>
